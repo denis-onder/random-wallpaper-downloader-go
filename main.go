@@ -2,30 +2,32 @@ package main
 
 import (
 	"bytes"
+	"crypto/rand"
 	"fmt"
 	"io"
-	"math/rand"
+	"log"
 	"net/http"
 	"os"
 )
 
-func randomString(n int) string {
-	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-
-	s := make([]rune, n)
-	for i := range s {
-		s[i] = letters[rand.Intn(len(letters))]
+func randomString() string {
+	b := make([]byte, 16)
+	_, err := rand.Read(b)
+	if err != nil {
+		log.Fatal(err)
 	}
-	return string(s)
+	uuid := fmt.Sprintf("%x%x%x%x%x",
+		b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
+	return uuid
 }
 
 func generateFileName() string {
-	// By default, save images to $HOME/Pictures
+	// By default, save images to $HOME/Pictures/Wallpapers
 	var output bytes.Buffer
 	val, _ := os.LookupEnv("HOME")
 	output.WriteString(val)
-	output.WriteString("/Pictures/")
-	output.WriteString(randomString(12))
+	output.WriteString("/Pictures/Wallpapers")
+	output.WriteString(randomString())
 	output.WriteString(".jpeg")
 	return output.String()
 }
