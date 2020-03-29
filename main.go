@@ -26,7 +26,7 @@ func generateFileName() string {
 	var output bytes.Buffer
 	val, _ := os.LookupEnv("HOME")
 	output.WriteString(val)
-	output.WriteString("/Pictures/Wallpapers")
+	output.WriteString("/Pictures/Wallpapers/")
 	output.WriteString(randomString())
 	output.WriteString(".jpeg")
 	return output.String()
