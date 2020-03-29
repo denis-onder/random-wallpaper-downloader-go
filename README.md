@@ -1,6 +1,6 @@
 # Random Wallpaper Downloader
 
-Rewrite of my [original](https://github.com/denis-onder/random-wallpaper-downloader) in Golang.
+Rewrite of my [original](https://github.com/denis-onder/random-wallpaper-downloader) wallpaper downloader in Golang.
 
 ### Usage
 
